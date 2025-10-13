@@ -1,0 +1,46 @@
+:root {
+  /* Main colors*/
+  --leo-primary: #94d7f1;
+  --leo-secondary: #d5192e;
+  --leo-secondary-light: #ff2a47;  
+  --leo-light: #b8e6f7;
+  --leo-dark: #6ab8d9;
+  
+  /* Background */
+  --leo-bg: #1a1a1a;
+  --leo-bg-darker: #0f0f0f;
+  --leo-surface: #252525;
+  --leo-surface-light: #5c5c5c;   /* Světlejší povrch */
+  --leo-border: #898989;    
+  
+  /* Text */
+  --leo-text: #e0e0e0;
+  --leo-text-dim: #999999;
+  
+  /* Bubbles */
+  --leo-bot-bubble: #2a2a2a;
+  --leo-user-bubble: #94d7f1;
+  
+  /* Effects */
+  --leo-glass-bg: rgba(42, 42, 42, 0.7)
+  --leo-glass-border: rgba(148, 215, 241, 0.2);
+  --leo-shadow: rgba(0, 0, 0, 0.5); 
+  --leo-shadow-light: rgba(148, 215, 241, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-image: url("/img/polar.jpg");
+  background-size: cover;
+  background-position: center;
+  color: var(--leo-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

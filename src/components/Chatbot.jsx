@@ -42,6 +42,17 @@ const Chatbot = () => {
     }
   };
 
+  const subtitles = [
+    'Tvůj chytrý asistent',
+    'Rychlá pomoc na jednom místě',
+    'Vysvětlím, poradím, navrhnu',
+    'Jsem tu, když něco drhne',
+    'Pomohu ti s čímkoli',
+    'Tvůj digitální parťák',
+    'Mluv se mnou, jsem tu pro tebe',
+  ];
+  const [subtitle] = useState(() => subtitles[Math.floor(Math.random()*subtitles.length)]);
+
 
   return (<>
     <article 
@@ -51,7 +62,7 @@ const Chatbot = () => {
     >
       <div className="chatbot-header">
         <h1 >Mojo</h1>
-        <h2></h2>
+        <h2>{subtitle}</h2>
         <button
           className="new-chat-btn"
           title="Nový chat"

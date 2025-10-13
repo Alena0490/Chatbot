@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
+
 :root {
   /* Main colors*/
   --leo-primary: #94d7f1;
+  --leo-primary-transparent: rgba(148, 215, 241, 0.8);
   --leo-secondary: #d5192e;
   --leo-secondary-light: #ff2a47;  
   --leo-light: #b8e6f7;
@@ -8,10 +11,14 @@
   
   /* Background */
   --leo-bg: #1a1a1a;
+  --leo-bg-transparent: rgba(26, 26, 26, 0.8);
   --leo-bg-darker: #0f0f0f;
   --leo-surface: #252525;
-  --leo-surface-light: #5c5c5c;   /* Světlejší povrch */
-  --leo-border: #898989;    
+  --leo-surface-transparent: rgba(37, 37, 37, 0.8);
+  --leo-surface-light: #5c5c5c;
+  --leo-surface-light-transparent: rgba(92, 92, 92, 0.4);
+  --leo-border: #898989;
+  --leo-border-dark: #505050;    
   
   /* Text */
   --leo-text: #e0e0e0;
@@ -19,10 +26,12 @@
   
   /* Bubbles */
   --leo-bot-bubble: #2a2a2a;
+  --leo-bot-bubble-transparent: rgba(42, 42, 42, 0.9);
   --leo-user-bubble: #94d7f1;
+  --leo-user-bubble-transparent: rgba(148, 215, 241, 0.9);
   
   /* Effects */
-  --leo-glass-bg: rgba(42, 42, 42, 0.7)
+  /* --leo-glass-bg: rgba(42, 42, 42, 0.7); */
   --leo-glass-border: rgba(148, 215, 241, 0.2);
   --leo-shadow: rgba(0, 0, 0, 0.5); 
   --leo-shadow-light: rgba(148, 215, 241, 0.2);
@@ -32,15 +41,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 body {
-  background-image: url("/img/polar.jpg");
+  background-image: url("/img/marble.jpg");
   background-size: cover;
   background-position: center;
   color: var(--leo-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Nunito', sans-serif;
 }

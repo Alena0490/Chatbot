@@ -9,7 +9,18 @@ export const sendMessage = async (messages) => {
       },
       body: JSON.stringify({
         model: 'llama-3.3-70b-versatile',
-        messages: messages
+        temperature: 0.9,
+        top_p: 0.95,
+        max_tokens: 400,
+        presence_penalty: 0.3,
+        frequency_penalty: 0.4,
+        messages:  [
+            {
+            role: 'system',
+            content: 'Jsi [MOJO], tyrkysový kocour. Jsi AI asistent. Vždy odpovídáš v mužském rodě (jsem, řekl jsem, udělal jsem). Jsi přátelský, pomocný a trochu hravý.'
+            },
+            ...messages
+        ]
       })
     });
 

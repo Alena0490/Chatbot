@@ -13,8 +13,8 @@ export const detectMood = (message) => {
 
    // LAUGH - smích, vtip, zábava
   const laughKeywords = [
-    'haha', 'hehe', 'hihi', 'lol', 'vtip', 'legrace', 
-    'zábav', 'směšné', 'legrační', 'sranda', 'vtipné',
+    'haha', 'ha ha', 'hehe', 'hihi', 'lol', 'vtip', 'legrace', 
+     'směšné', 'legrační', 'sranda', 'vtipné',
     '😂', '🤣', '😄', '😆', 'rofl', 'vtipálek'
   ];
   if (laughKeywords.some(word => text.includes(word))) {

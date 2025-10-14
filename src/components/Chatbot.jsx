@@ -53,6 +53,7 @@ const Chatbot = () => {
   ];
   const [subtitle] = useState(() => subtitles[Math.floor(Math.random()*subtitles.length)]);
 
+  const AVATAR_BASE = `${import.meta.env.BASE_URL}avatars/`.replace(/\/+/g, '/');
 
   return (<>
     <article 
@@ -97,9 +98,13 @@ const Chatbot = () => {
                     >
                       {msg.role === 'assistant' && (
                         <img 
-                          src={`/avatars/${mood}.webp`} 
+                          src={`${AVATAR_BASE}${mood}.webp`} 
                           alt="Mojo avatar" 
                           className="message-avatar"
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = `${AVATAR_BASE}basic.webp`;
+                          }}
                         />
                       )}
                       <div 

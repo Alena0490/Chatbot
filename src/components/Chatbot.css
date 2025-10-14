@@ -151,6 +151,7 @@ h2 {
     position: relative;
     display: flex;
     clear: both;
+    border: 2px solid yellow;
 }
 
 .message-wrapper.user {

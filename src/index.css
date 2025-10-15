@@ -35,6 +35,19 @@
   --leo-glass-border: rgba(148, 215, 241, 0.2);
   --leo-shadow: rgba(0, 0, 0, 0.5); 
   --leo-shadow-light: rgba(148, 215, 241, 0.2);
+
+  /* sizes */
+  --step--1: clamp(0.875rem, calc(0.821rem + 0.238vw), 1rem);   /* ~14 → 16 px */
+  --step-0:  clamp(1rem,     calc(0.946rem + 0.238vw), 1.125rem);/* 16 → 18 px  */
+  --step-1:  clamp(1.25rem,  calc(1.143rem + 0.476vw), 1.5rem);  /* 20 → 24 px  */
+  --step-2:  clamp(1.5rem,   calc(1.179rem + 1.429vw), 2.25rem); /* 24 → 36 px  */
+  --step-3:  clamp(2rem,     calc(1.571rem + 1.905vw), 3rem);    /* 32 → 48 px (H1) */
+
+  /* gap scale */
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: clamp(1.75rem, 1.2rem + 1.5vw, 2.25rem);
 }
 
 * {
@@ -44,12 +57,19 @@
 }
 
 body {
-  background-image: url("/img/marble.jpg");
+  background-image: url("/img/marble.webp");
   background-size: cover;
   background-position: center;
   color: var(--leo-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
   font-family: 'Nunito', sans-serif;
+}
+
+@media screen and (max-width: 648px) {
+  body {
+    background-image: url("/img/marble-mobile.webp");
+  }  
 }

@@ -1,0 +1,6 @@
+# robots.txt for Mojo
+User-agent: *
+Allow: /
+
+# for production
+Sitemap: https://alena-pumprova.cz/sitemap.xml

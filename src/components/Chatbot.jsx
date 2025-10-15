@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { sendMessage } from '../services/groqService';
 import './Chatbot.css';
 import { detectMood } from '../utils/detectMood';
@@ -10,6 +10,13 @@ const Chatbot = () => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+const inputRef = useRef(null);
+
+useEffect(() => {
+  const id = requestAnimationFrame(() => inputRef.current?.focus());
+  return () => cancelAnimationFrame(id);
+}, []);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -53,6 +60,21 @@ const Chatbot = () => {
   ];
   const [subtitle] = useState(() => subtitles[Math.floor(Math.random()*subtitles.length)]);
 
+  const [showSub, setShowSub] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setShowSub(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  const endRef = useRef(null);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      endRef.current?.scrollIntoView({ block: "end", inline: "nearest" });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [messages.length]);
+
   const AVATAR_BASE = `${import.meta.env.BASE_URL}avatars/`.replace(/\/+/g, '/');
 
   return (<>
@@ -63,7 +85,12 @@ const Chatbot = () => {
     >
       <div className="chatbot-header">
         <h1 >Mojo</h1>
-        <h2>{subtitle}</h2>
+        <h2
+          className={`subtitle ${showSub ? 'subtitle--show' : ''}`}
+          aria-hidden={!showSub}
+        >
+          {subtitle}
+        </h2>
         <button
           className="new-chat-btn"
           title="Nový chat"
@@ -99,7 +126,9 @@ const Chatbot = () => {
                       {msg.role === 'assistant' && (
                         <img 
                           src={`${AVATAR_BASE}${mood}.webp`} 
-                          alt="Mojo avatar" 
+                          alt="Mojo avatar"
+                          width={42}
+                          height={45} 
                           className="message-avatar"
                           onError={(e) => {
                             e.currentTarget.onerror = null;
@@ -116,6 +145,7 @@ const Chatbot = () => {
                     </div>
                   );
                 })}
+                <div ref={endRef} aria-hidden="true" />
             </div>
             <div className="input-area">
               <input
@@ -128,7 +158,7 @@ const Chatbot = () => {
                 className="message-input"
                 aria-label="Napiš zprávu"
                 tabIndex="0"
-                autoFocus 
+                ref={inputRef}
               />
                 <button
                   onClick={handleSend}

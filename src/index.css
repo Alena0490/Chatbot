@@ -56,7 +56,26 @@
   padding: 0;
 }
 
+*::-webkit-scrollbar {
+    width: 0.657rem;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+     background: linear-gradient(var(--leo-dark), var(--leo-primary));
+    border-radius: 0.282rem;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--leo-secondary);
+}
+
+
 body {
+  height: 100vh;
   background-image: url("/img/marble.webp");
   background-size: cover;
   background-position: center;
@@ -66,6 +85,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
   font-family: 'Nunito', sans-serif;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 648px) {

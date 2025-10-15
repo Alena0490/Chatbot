@@ -1,0 +1,13 @@
+/* blikající kurzor */
+.tw-caret {
+  display: inline-block;
+  animation: tw-blink 1s steps(2, start) infinite;
+  margin-left: 1px;
+  color: var( --leo-text-dim);
+}
+@keyframes tw-blink { to { opacity: 0; } }
+
+/* respektuj preference uživatelů – vypni animaci */
+@media (prefers-reduced-motion: reduce) {
+  .tw-caret { animation: none; }
+}

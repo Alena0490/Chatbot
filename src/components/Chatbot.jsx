@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { sendMessage } from '../services/groqService';
 import './Chatbot.css';
+import TypewriterMessage from './TypewriterMessage.jsx'; 
 import { detectMood } from '../utils/detectMood';
 import { LuRefreshCw } from "react-icons/lu";
 
@@ -10,9 +11,9 @@ const Chatbot = () => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isTyping, setIsTyping] = useState(false); // ✨
 
 const inputRef = useRef(null);
-
 useEffect(() => {
   const id = requestAnimationFrame(() => inputRef.current?.focus());
   return () => cancelAnimationFrame(id);
@@ -31,12 +32,14 @@ useEffect(() => {
     try {
       const response = await sendMessage(newMessages);
       setMessages([...newMessages, { role: 'assistant', content: response }]);
+      setIsTyping(true);
     } catch (error) {
         console.error('Chyba při volání API:', error);  // Vypíše do konzole
         setMessages([...newMessages, { 
             role: 'assistant', 
             content: 'Omlouvám se, něco se pokazilo. Zkuste to prosím znovu.' 
         }]);
+        setIsTyping(true);
     } finally {
       setIsLoading(false);
     }
@@ -73,7 +76,7 @@ useEffect(() => {
       endRef.current?.scrollIntoView({ block: "end", inline: "nearest" });
     });
     return () => cancelAnimationFrame(id);
-  }, [messages.length]);
+  }, [messages.length, isTyping, isLoading]);
 
   const AVATAR_BASE = `${import.meta.env.BASE_URL}avatars/`.replace(/\/+/g, '/');
 
@@ -110,11 +113,13 @@ useEffect(() => {
             <div 
               className="messages"
               role="log"
-              aria-live="polite"
-              aria-relevant="additions"
+              aria-live="off" 
+              aria-relevant="additions text"
             >
                {messages.map((msg, index) => {
                   const mood = msg.role === 'assistant' ? detectMood(msg.content) : 'basic';
+                    const isLast = index === messages.length - 1;
+                    const shouldType = msg.role === 'assistant' && isLast && isTyping;
                   
                   return (
                     <div 
@@ -136,12 +141,18 @@ useEffect(() => {
                           }}
                         />
                       )}
-                      <div 
-                        className={`message ${msg.role}`}
-                        role="text"
-                      >
-                        {msg.content}
-                      </div>
+                      {shouldType ? (
+                        <TypewriterMessage
+                          text={msg.content}
+                          cps={18}
+                          className={`message ${msg.role}`}
+                          onDone={() => setIsTyping(false)} // ✨ po dopsání vypnout „typing“
+                        />
+                      ) : (
+                        <div className={`message ${msg.role}`} role="text">
+                          {msg.content}
+                        </div>
+                      )}
                     </div>
                   );
                 })}

@@ -1,16 +1,17 @@
-// TypewriterMessage.jsx
+/* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import './TypewriterMessage.css';
 
 const TypewriterMessage = ({
+  
   text,
   cps = 18,
   startDelay = 250,
   showCaret = true,
   enableSkip = true,
   className = "",
-   as: Tag = "div", 
-   onProgress, 
+  as: Tag = "div", 
+  onProgress, 
 
   onDone,
 }) => {

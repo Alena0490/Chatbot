@@ -24,8 +24,7 @@ export const detectMood = (message) => {
   // SAD - omluvy, chyby, smutek
   const sadKeywords = [
     'omlouv', 'bohužel', 'chyba', 'promiň', 
-    'lituj', 'škoda', 'nestihl', 'nepovedl',  'mrzí'
-    // ← PŘIDEJTE DALŠÍ!
+    'lituj', 'škoda', 'nestihl', 'mrzí'
   ];
   if (sadKeywords.some(word => text.includes(word))) {
     return 'sad';

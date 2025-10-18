@@ -10,6 +10,8 @@ const TypewriterMessage = ({
   enableSkip = true,
   className = "",
    as: Tag = "div", 
+   onProgress, 
+
   onDone,
 }) => {
   const [out, setOut] = useState("");
@@ -20,30 +22,34 @@ const TypewriterMessage = ({
 
   const extraDelayFor = (ch) => (/[.,?!]/.test(ch) ? 80 : 0);
 
-  useEffect(() => {
+ useEffect(() => {
     setOut(""); setDone(false); iRef.current = 0; startRef.current = 0;
 
     const step = (t) => {
       if (!startRef.current) startRef.current = t + startDelay;
       const elapsed = Math.max(0, t - startRef.current);
-      let budget = (elapsed / 1000) * cps;
-      let idx = 0;
+      let budget = Math.min(1, (elapsed / 1000) * cps); // max 1 znak / frame
+      let idx = iRef.current;
+
       while (idx < text.length && budget >= 1) {
         budget -= 1 + extraDelayFor(text[idx]) / (1000 / cps);
         idx++;
       }
+
       const next = Math.min(text.length, idx);
       if (next !== iRef.current) {
         iRef.current = next;
         setOut(text.slice(0, next));
+        onProgress?.(next);      // 👈 pípni parentu na každý krok
       }
+
       if (next >= text.length) { setDone(true); onDone?.(); return; }
       rafRef.current = requestAnimationFrame(step);
     };
 
     rafRef.current = requestAnimationFrame(step);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [text, cps, startDelay, onDone]);
+  }, [text, cps, startDelay, onDone, onProgress]);
 
   const skip = () => {
     if (enableSkip && !done) {

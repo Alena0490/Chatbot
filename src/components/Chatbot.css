@@ -385,6 +385,12 @@ h2 {
     background: var(--leo-secondary);
 }
 
+@media screen and (max-height: 900px) {
+    .chatbot-header {
+        padding: 2.625rem 1.313rem 1.313rem;
+    }
+}
+
 @media screen and (max-width: 648px) {
     .chatbot-container {
         height: 95vh;

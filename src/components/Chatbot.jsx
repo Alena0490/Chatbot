@@ -143,8 +143,12 @@ useEffect(() => {
                       )}
                       {shouldType ? (
                         <TypewriterMessage
+                          as = "div"  
                           text={msg.content}
                           cps={18}
+                          startDelay={250}
+                          showCaret={true}
+                          enableSkip={true}
                           className={`message ${msg.role}`}
                           onDone={() => setIsTyping(false)} // ✨ po dopsání vypnout „typing“
                         />
